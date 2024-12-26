@@ -1,0 +1,33 @@
+##This file will hold the actual values for the Helm chart. These values will either come from the default values defined in schema.yaml or the user input provided during installation (as in the mpdev command)
+namespace: "default"  
+pullImagefrom: "aretecinc-public"
+## Client GCP Project ID (Example: my-project)
+projectID: ""        
+containerPort: 5000
+## Client Website url
+allowedOrigin: ""
+## Client Email Address (EMAIL ADDRESS: xwy@gmail.com) 
+authEmail: ""
+## DBUSER ( Use this command for retriving database USER, 'gcloud secrets versions access latest --secret="DB_USER"')
+dbUser: ""
+## DB PASSWORD ( Use this command for retriving database PASSWORD, 'gcloud secrets versions access latest --secret="DB_PASSWORD"')
+dbPassword: ""
+## DB PASSWORD ( Use this command for retriving database BUCKET NAME, 'gcloud secrets versions access latest --secret="GCP_BUCKET"')
+gcpBucket: ""
+## DB PASSWORD ( Use this command for retriving database HOST, 'gcloud secrets versions access latest --secret="DB_HOST"')
+dbHost: ""
+schema: "disearch"
+appName: "disearch"
+IS_PENSDOWN: false
+IS_CONTEXT: false
+DOCUMENT_CHAT_URL: "http://doc-chat-service.default.svc.cluster.local"
+vertex_ai_search_summary_url: "http://vertexai-summary-service.default.svc.cluster.local"
+vertex_ai_followup_url: "http://vertex-ai-followup-service.default.svc.cluster.local"
+IS_VERTEX_AI: true
+vertex_ai_search_base_url: "http://vertexai-citation-service.default.svc.cluster.local"
+vertex_ai_init_base_url: "http://vertexai-service.default.svc.cluster.local"
+APP_VERSION: "ST"
+
+
+
+

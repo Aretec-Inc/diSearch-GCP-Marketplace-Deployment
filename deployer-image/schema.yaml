@@ -1,0 +1,207 @@
+x-google-marketplace:
+  schemaVersion: v2
+  applicationApiVersion: v1beta1
+  publishedVersion: '1.0.8'
+  publishedVersionMetadata:
+    releaseNote: >-
+      Version 1.0.8:
+      - disearch deployment with deployer image
+  images:
+    disearch:
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/disearch
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+    
+    etcdImage: 
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/cache/etcd
+        imageTag:
+          type: TAG
+          default: "3.5.14-debian-12-r1"
+    
+    redisImage:
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/cache/redis
+        imageTag:
+          type: TAG
+          default: "7.2.5-debian-12-r2"
+    
+    documentChatImage: 
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/document-chat
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+    
+    loadbalancerImage:  
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/loadbalancer
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+    
+    pdfConverterImage:  
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/pdf-converter
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+    
+    vertexaiCitationsImage:
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/vertexai-citations
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+    
+    vertexaiInitImage:
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/vertexai-init
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+    
+    vertexaiSummaryImage:
+      properties:
+        imageRepo: 
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/vertexai-summary
+        imageTag:
+          type: TAG
+          default: "1.0.8"
+
+properties:
+  name:
+    type: string
+    description: The name of the application deployment.
+    default: disearch
+    x-google-marketplace:
+      type: NAME
+      required: true
+      
+  namespace:
+    type: string
+    description: The Kubernetes namespace for deploying the application.
+    default: default
+    x-google-marketplace:
+      type: NAMESPACE
+      required: true
+    
+  allowedOrigin:
+    type: string
+    description: "Allowed origin for CORS"
+    default: "worldlearning.dataimagineers.ai"
+    
+  authEmail:
+    type: string
+    description: "Email address for authentication"
+    default: "muhammadhassanb122@gmail.com"
+    
+  dbUser:
+    type: string
+    description: "The database username"
+    default: "postgres"
+    
+  dbPassword:
+    type: string
+    description: "The database password"
+    default: "CKhEJZH[uFS;%=Mg8iwueVm&x"
+    x-google-marketplace:
+      type: MASKED_FIELD
+      required: true
+
+  dbHost:
+    type: string
+    description: "The database host"
+    default: "10.50.0.6"
+    
+  gcpBucket:
+    type: string
+    description: "The GCP bucket name"
+    default: "disearch-storage-bucket-2tzxkx9a"
+    
+  projectID:
+    type: string
+    description: "The GCP project ID"
+    default: "world-learning-400909"
+    
+  replicaCount:
+    type: integer
+    title: Replica Count
+    description: Number of replicas for the service.
+    default: 1
+
+  pdfConvert.cloudSqlDbConn:
+    type: string
+    description: "The Cloud SQL DB connection string (Base64-encoded)"
+    default: "cG9zdGdyZXNxbDovL3Bvc3RncmVzOkNLaEVKWkhbdUZTOyU9TWc4aXd1ZVZtJnhAMTAuNTAuMC42L3Bvc3RncmVz"
+    x-google-marketplace:
+      type: STRING
+      required: true
+
+  loadbalancer.k8sApiServerUrl:
+    type: string
+    description: "The URL for the Kubernetes API server (Base64-encoded)"
+    default: "aHR0cHM6Ly8xMC4zLjAuNA=="
+    x-google-marketplace:
+      type: STRING
+      required: true
+  
+  vertexai.openaiApiKey:
+    type: string
+    description: "The OpenAI API key for Vertex AI"
+    default: ""
+    
+  vertexai.statusCloudFn:
+    type: string
+    description: "The URL for the Vertex AI status cloud function"
+    default: "https://us-central1-world-learning-400909.cloudfunctions.net/document-status"
+          
+  vertexai.imageSummaryCloudFn:
+    type: string
+    description: "The URL for the Vertex AI image summary cloud function"
+    default: "https://us-central1-world-learning-400909.cloudfunctions.net/image-processing"
+          
+  vertexai.updateMetadataFn:
+    type: string
+    description: "The URL for the Vertex AI metadata update cloud function"
+    default: "https://us-central1-world-learning-400909.cloudfunctions.net/update_metadata_ingested_document"
+    
+  vertexai.schema:
+    type: string
+    default: "disearch_search"
+    description: Schema Info
+
+  serviceAccountName:
+    type: string
+    default: gke-sa 
+    description: GKE Service Account Name 
+
+required:
+  - name
+  - namespace
+  - gcpBucket
+  - vertexai.updateMetadataFn
+  - vertexai.imageSummaryCloudFn
+  - vertexai.statusCloudFn
+  - vertexai.openaiApiKey
+  - pdfConvert.cloudSqlDbConn
+  - projectID
