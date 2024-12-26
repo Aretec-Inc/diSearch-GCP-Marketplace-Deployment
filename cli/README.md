@@ -227,13 +227,96 @@ Deploying Cloud Function Metadata Extractor
       --vpc-connector disearch-vpc-connector --region us-central1 --serve-all-traffic-latest-revision --gen2 --memory 1G
     cd ..
 
-## Step 11: 
+## Step 11:  Helm Charts Configuration and Deployment Instructions
 
-Add password for etcd chart in values.yaml file at line#121:  And also encode this in base 64 and place this in vertexai values.yaml at line#39
+#### Adding Passwords to values.yaml Files
 
-Add password for redis chart in values.yaml file at line#146:   
+  ETCD Chart:
 
-Applying helm charts
+    - Add the password at line #121 in the values.yaml file.
+    - Encode the password in Base64 and add it to the vertexai values.yaml file at line #20.
+
+  Redis Chart:
+
+    - Add the password at line #146 in the values.yaml file.
+
+#### Required Variables for Deployer Image Deployment
+
+When deploying the deployer image from Google Cloud Marketplace, you must provide the following variables:
+
+    - GCP Project ID
+    - GCP Cloud SQL DB Connection String (Base64 Encoded)
+    - GKE Kubernetes API Server URL (Base64 Encoded)
+    - Website URL
+    - Client Email Address
+    - Database (DB) User
+    - Database (DB) Password
+    - Database (DB) Host
+    - GCP Bucket Name (created via Terraform)
+    - Cloud Function URLs:
+      - document-status
+      - image-processing
+      - update_metadata_ingested_document
+
+You can obtain the required variable information using the following commands.
+
+- Fetch the project ID and place it in the vertexai and disearch values.yaml file at line #5.
+
+- Use the following command to create a connection string and encode it in Base64. Place it in vertexai values.yaml at line #12 under the variable "cloudSqlDbConn".
+
+    Creating Postgres Connection String
+
+      ENCODED_CONN_STRING=$(echo -n "postgresql://postgres:$(gcloud secrets versions access latest --secret=DB_PASSWORD)@$(gcloud secrets versions access latest --secret=DB_HOST)/postgres" | base64 -w 0)
+    
+    Use below commands for Verificaiton
+
+      echo "$ENCODED_CONN_STRING"
+
+      echo "ENCODED_CONN_STRING: $(echo "$ENCODED_CONN_STRING" | base64 --decode)"
+
+- Fetch the private endpoint of the cluster and encode it in Base64. Place it in vertexai values.yaml at line #17 under the variable "k8sApiServerUrl".
+
+      Fetch private endpoint of Cluster
+
+        echo "INTERNAL_ENDPOINT: $(echo -n "https://$(gcloud container clusters describe disearch-cluster --zone us-central1-c --format="get(privateClusterConfig.privateEndpoint)")" | base64)"
+      
+      Decode the base64 encoded endpoint for verfication
+
+        echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
+
+- Place the client website URL in the disearch values.yaml file at line #8 under the variable "allowedOrigin".
+- Place the client email address in the disearch values.yaml file at line #10 under the variable "authEmail".
+
+- DB User: Place at line #12 in disearch values.yaml file..
+
+    gcloud secrets versions access latest --secret="DB_USER"
+
+- DB Password: Place at line #14 in disearch values.yaml file..
+
+    gcloud secrets versions access latest --secret="DB_PASSWORD"
+
+- DB Host: Place at line #18 in disearch values.yaml file.
+
+    gcloud secrets versions access latest --secret="DB_HOST"
+
+- GCP Bucket: Place at line #16 in disearch values.yaml file
+
+    gcloud secrets versions access latest --secret="GCP_BUCKET"
+
+- Fetch Cloudfunction URLs of service document-status and place this in vertexai values.yaml file at line 34 under variable "statusCloudFn".
+
+    gcloud functions describe document-status --region=us-central1 --format="value(url)"
+
+- Get Cloudfunction URLs of service image-processing and place this in vertexai values.yaml file at line 35 under variable "imageSummaryCloudFn".
+
+    gcloud functions describe image-processing --region=us-central1 --format="value(url)"
+
+- Get Cloudfunction URLs of service update_metadata and place this in vertexai values.yaml file at line 36 under variable "updateMetadataFn".
+
+    gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
+
+
+Applying helm charts using below commands.
 
     helm install etcd ./cli/chart/disearch/charts/etcd
     helm install redis ./cli/chart/disearch/charts/redis

@@ -1,14 +1,14 @@
 ##This file will hold the actual values for the Helm chart. These values will either come from the default values defined in schema.yaml or the user input provided during installation (as in the mpdev command)
 namespace: "default"  
 pullImagefrom: "aretecinc-public"
-projectID: "world-learning-400909"
+projectID: ""
 containerPort: 5000
-allowedOrigin: "worldlearning.dataimagineers.ai"
-authEmail: "muhammadhassanb122@gmail.com"
-dbUser: "postgres"
-dbPassword: "CKhEJZH[uFS;%=Mg8iwueVm&x"
-gcpBucket: "disearch-storage-bucket-2tzxkx9a"
-dbHost: "10.50.0.6"
+allowedOrigin: ""
+authEmail: ""
+dbUser: ""
+dbPassword: ""
+gcpBucket: ""
+dbHost: ""
 schema: "disearch"
 appName: "disearch"
 IS_PENSDOWN: false

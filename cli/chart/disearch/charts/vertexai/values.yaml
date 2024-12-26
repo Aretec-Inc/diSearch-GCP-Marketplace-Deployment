@@ -8,20 +8,12 @@ namespace: "default"
 
 pdfConvert:
   containerPort: 5000 
-  cloudSqlDbConn: " "
+  ## Connection string for postgress database
+  cloudSqlDbConn: ""
 
 loadbalancer:
   containerPort: 8080
-   
-  ## Get GKE kube API Server URL in Base64 Encoded format
-
-  ##Fetch private endpoint of Cluster by using below command. And use this in k8sApiServerUrl: "" as variable
-
-          ##echo "INTERNAL_ENDPOINT: $(echo -n "https://$(gcloud container clusters describe disearch-cluster --zone us-central1-c --format="get(privateClusterConfig.privateEndpoint)")" | base64)"
-
-  ##Decode the base64 encoded endpoint for verfication
-
-          ##echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
+  ## k8 endpoint
   k8sApiServerUrl: ""
   #etcd.default.svc.cluster.local:2379
   etcdHost: "ZXRjZC5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsOjIzNzk="
@@ -39,14 +31,8 @@ vertexaiCitation:
 vertexai:
   containerPort: 5000
   openaiApiKey: ""
-  ## GET Cloud Function url for document-status service by using below command. And use in statusCloudFn: "" as variable
-      ##gcloud functions describe document-status --region=us-central1 --format="value(url)"
-  statusCloudFn: " "
-  ## GET Cloud Function url for imageSummary service by using below command. And use in imageSummaryCloudFn: "" as variable
-      ##"gcloud functions describe image-processing --region=us-central1 --format="value(url)"
+  statusCloudFn: ""
   imageSummaryCloudFn: ""
-  ## GET Cloud Function url for updateMetadata service by using below command. And use in updateMetadataFn: "" as variable
-      ##"gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
   updateMetadataFn: ""
   schema: "disearch_search"
 

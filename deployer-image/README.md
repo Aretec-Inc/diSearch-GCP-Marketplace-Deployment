@@ -233,94 +233,100 @@ Deploying Cloud Function Metadata Extractor
 ## Step 11: RUN the deployer image from GCP Market place for deploying the Applications services.
 
 
+  #### Adding Passwords to values.yaml Files
+
+  ETCD Chart:
+
+    - Add the password at line #121 in the values.yaml file.
+    - Encode the password in Base64 and add it to the vertexai values.yaml file at line #21.
+
+  Redis Chart:
+
+    - Add the password at line #146 in the values.yaml file.
+
+  #### Required Variables for Deployer Image Deployment
+
   When deploying the deployer image from Google Cloud Marketplace, you need to provide following variables.
 
   - GCP project id
   - GCP Cloud SQL Db Connection String in Base64 Encoded format
   - GKE kube API Server URL in Base64 Encoded format
-  - Website URL
   - Client Email Address
   - DB User
-  - DB Password 
+  - DB Password
   - DB Host
-  - GCP Bucket Name created by terraform 
-  - Cloudfunction URLs
-    Name: 
-      document-status 
-      image-processing 
-      update_metadata_ingested_document  
-  
-  You can obtain the required variable information using the following commands.
+  - GCP Bucket Name created by terraform
+  - Cloudfunction URLs Name:
+    - document-status
+    - image-processing
+    - update_metadata_ingested_document
 
-  - GCP project id: Client GCP Project ID
-  - GCP Cloud SQL Db Connection String in Base64 Encoded format
+
+You can obtain the required variable information using the following commands.
+
+- GCP project id: Client GCP Project ID
+
+- GCP Cloud SQL Db Connection String in Base64 Encoded format
 
     Creating Postgres Connection String
 
-          ENCODED_CONN_STRING=$(echo -n "postgresql://postgres:$(gcloud secrets versions access latest --secret=DB_PASSWORD)@$(gcloud secrets versions access latest --secret=DB_HOST)/postgres" | base64 -w 0)
-
+      ENCODED_CONN_STRING=$(echo -n "postgresql://postgres:$(gcloud secrets versions access latest --secret=DB_PASSWORD)@$(gcloud secrets versions access latest --secret=DB_HOST)/postgres" | base64 -w 0)
+    
     Use below commands for Verificaiton
 
-          echo "$ENCODED_CONN_STRING"
-  
-          echo "ENCODED_CONN_STRING: $(echo "$ENCODED_CONN_STRING" | base64 --decode)"
+      echo "$ENCODED_CONN_STRING"
 
-  - GKE kube API Server URL in Base64 Encoded format
+      echo "ENCODED_CONN_STRING: $(echo "$ENCODED_CONN_STRING" | base64 --decode)"
 
-    Fetch private endpoint of Cluster
+- GKE kube API Server URL in Base64 Encoded format
 
-          echo "INTERNAL_ENDPOINT: $(echo -n "https://$(gcloud container clusters describe disearch-cluster --zone us-central1-c --format="get(privateClusterConfig.privateEndpoint)")" | base64)"
+  Fetch private endpoint of Cluster
 
-    Decode the base64 encoded endpoint for verfication
+    echo "INTERNAL_ENDPOINT: $(echo -n "https://$(gcloud container clusters describe disearch-cluster --zone us-central1-c --format="get(privateClusterConfig.privateEndpoint)")" | base64)"
 
-          echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
-  
-  - Website URL: CLIENT WEBSITE URL
-  - Client Email Address: EMAIL ADDRESS
-  
-  - DB User
+  Decode the base64 encoded endpoint for verfication
 
-        gcloud secrets versions access latest --secret="DB_USER"
- 
-  - DB Password 
+    echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
 
-        gcloud secrets versions access latest --secret="DB_PASSWORD"
 
-  - DB Host
 
-        gcloud secrets versions access latest --secret="DB_HOST"
+- Client Email Address: EMAIL ADDRESS
 
-  - GCP Bucket 
+- DB User
 
-        gcloud secrets versions access latest --secret="GCP_BUCKET"
+  gcloud secrets versions access latest --secret="DB_USER"
 
-  - Cloudfunction URLs
-    Name: 
-      document-status:
+- DB Password
 
-        gcloud functions describe document-status --region=us-central1 --format="value(url)"
+  gcloud secrets versions access latest --secret="DB_PASSWORD"
 
-      image-processing:
+- DB Host
 
-        gcloud functions describe image-processing --region=us-central1 --format="value(url)"
+  gcloud secrets versions access latest --secret="DB_HOST"
 
-      update_metadata_ingested_document:
+- GCP Bucket
 
-        gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
+  gcloud secrets versions access latest --secret="GCP_BUCKET"
 
-NOTE: 
+- Cloudfunction URLs Name: document-status:
 
-  Add password for etcd chart in values.yaml file at line#121:  And also encode this in base 64 and place this in vertexai values.yaml at line#39
+  gcloud functions describe document-status --region=us-central1 --format="value(url)"
 
-  Add password for redis chart in values.yaml file at line#146:    
+- image-processing:
+
+  gcloud functions describe image-processing --region=us-central1 --format="value(url)"
+
+- update_metadata_ingested_document:
+
+  gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
 
 ## Step 12: Updating Cloudfunction URL's in GCP Secrets
 
-    gcloud secrets versions add status_cloud_fn --data-file=<(echo -n "$(gcloud functions describe document-status --region=us-central1 --format="value(url)")") --project="YOUR_GCP_PROJECT_ID"
+      gcloud secrets versions add status_cloud_fn --data-file=<(echo -n "$(gcloud functions describe document-status --region=us-central1 --format="value(url)")") --project="YOUR_GCP_PROJECT_ID"
 
-    gcloud secrets versions add image_summary_cloud_fn --data-file=<(echo -n "$(gcloud functions describe image-processing --region=us-central1 --format="value(url)")") --project="YOUR_GCP_PROJECT_ID"
-        
-    gcloud secrets versions add metadata_cloud_fn --data-file=<(echo -n "$(gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)")") --project="YOUR_GCP_PROJECT_ID"
+      gcloud secrets versions add image_summary_cloud_fn --data-file=<(echo -n "$(gcloud functions describe image-processing --region=us-central1 --format="value(url)")") --project="YOUR_GCP_PROJECT_ID"
+          
+      gcloud secrets versions add metadata_cloud_fn --data-file=<(echo -n "$(gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)")") --project="YOUR_GCP_PROJECT_ID"
 
 
 ## Step 13: Creating Pubsub and subscriptions
