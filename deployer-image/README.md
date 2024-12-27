@@ -261,12 +261,11 @@ Deploying Cloud Function Metadata Extractor
     - image-processing
     - update_metadata_ingested_document
 
+You can obtain the required variable information using the following commands and place this information in the corresponding values.yaml file.
 
-You can obtain the required variable information using the following commands.
+- Fetch the project ID and place it in the vertexai and disearch values.yaml file at line #4.
 
-- GCP project id: Client GCP Project ID
-
-- GCP Cloud SQL Db Connection String in Base64 Encoded format
+- Use the following command to create a connection string and encode it in Base64. Place it in vertexai values.yaml at line #12 under the variable "cloudSqlDbConn".
 
     Creating Postgres Connection String
 
@@ -278,47 +277,48 @@ You can obtain the required variable information using the following commands.
 
       echo "ENCODED_CONN_STRING: $(echo "$ENCODED_CONN_STRING" | base64 --decode)"
 
-- GKE kube API Server URL in Base64 Encoded format
+- Fetch the private endpoint of the cluster and encode it in Base64. Place it in vertexai values.yaml at line #18 under the variable "k8sApiServerUrl".
 
-  Fetch private endpoint of Cluster
+      Fetch private endpoint of Cluster
 
-    echo "INTERNAL_ENDPOINT: $(echo -n "https://$(gcloud container clusters describe disearch-cluster --zone us-central1-c --format="get(privateClusterConfig.privateEndpoint)")" | base64)"
+        echo "INTERNAL_ENDPOINT: $(echo -n "https://$(gcloud container clusters describe disearch-cluster --zone us-central1-c --format="get(privateClusterConfig.privateEndpoint)")" | base64)"
+      
+      Decode the base64 encoded endpoint for verfication
 
-  Decode the base64 encoded endpoint for verfication
+        echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
 
-    echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
+- Place the client website URL in the disearch values.yaml file at line #6 under the variable "allowedOrigin".
+- Place the client email address in the disearch values.yaml file at line #7 under the variable "authEmail".
 
+- DB User: Place at line #8 in disearch values.yaml file..
 
+    gcloud secrets versions access latest --secret="DB_USER"
 
-- Client Email Address: EMAIL ADDRESS
+- DB Password: Place at line #9 in disearch values.yaml file..
 
-- DB User
+    gcloud secrets versions access latest --secret="DB_PASSWORD"
 
-  gcloud secrets versions access latest --secret="DB_USER"
+- DB Host: Place at line #11 in disearch values.yaml file.
 
-- DB Password
+    gcloud secrets versions access latest --secret="DB_HOST"
 
-  gcloud secrets versions access latest --secret="DB_PASSWORD"
+- GCP Bucket: Place at line #10 in disearch values.yaml file
 
-- DB Host
+    gcloud secrets versions access latest --secret="GCP_BUCKET"
 
-  gcloud secrets versions access latest --secret="DB_HOST"
+- Fetch Cloudfunction URLs of service document-status and place this in vertexai values.yaml file at line 35 under variable "statusCloudFn".
 
-- GCP Bucket
+    gcloud functions describe document-status --region=us-central1 --format="value(url)"
 
-  gcloud secrets versions access latest --secret="GCP_BUCKET"
+- Get Cloudfunction URLs of service image-processing and place this in vertexai values.yaml file at line 36 under variable "imageSummaryCloudFn".
 
-- Cloudfunction URLs Name: document-status:
+    gcloud functions describe image-processing --region=us-central1 --format="value(url)"
 
-  gcloud functions describe document-status --region=us-central1 --format="value(url)"
+- Get Cloudfunction URLs of service update_metadata and place this in vertexai values.yaml file at line 37 under variable "updateMetadataFn".
 
-- image-processing:
+    gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
 
-  gcloud functions describe image-processing --region=us-central1 --format="value(url)"
-
-- update_metadata_ingested_document:
-
-  gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
+Once completed, build the Dockerfile to create a Docker image and push it to a public repository. After that, you can deploy the deployer image from the GCP Marketplace.
 
 ## Step 12: Updating Cloudfunction URL's in GCP Secrets
 
