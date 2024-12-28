@@ -261,7 +261,7 @@ Deploying Cloud Function Metadata Extractor
     - image-processing
     - update_metadata_ingested_document
 
-You can use the following commands to obtain the required variable information. Add this information as **default values** in the **schema.yaml** file and include it in the corresponding **values.yaml** file as discussed below.
+You can use the following commands to obtain the required variable information. Add this information as **default values** in the **schema.yaml** file and include it in the corresponding **values.yaml** file, as described below.
 
 - Fetch the project ID and place it in the vertexai and disearch values.yaml file at line #4.
 
