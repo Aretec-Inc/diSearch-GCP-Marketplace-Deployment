@@ -108,22 +108,22 @@ properties:
   allowedOrigin:
     type: string
     description: "Allowed origin for CORS"
-    default: "worldlearning.dataimagineers.ai"
+    default: ""
     
   authEmail:
     type: string
     description: "Email address for authentication"
-    default: "muhammadhassanb122@gmail.com"
+    default: ""
     
   dbUser:
     type: string
     description: "The database username"
-    default: "postgres"
+    default: ""
     
   dbPassword:
     type: string
     description: "The database password"
-    default: "CKhEJZH[uFS;%=Mg8iwueVm&x"
+    default: ""
     x-google-marketplace:
       type: MASKED_FIELD
       required: true
@@ -131,17 +131,17 @@ properties:
   dbHost:
     type: string
     description: "The database host"
-    default: "10.50.0.6"
+    default: ""
     
   gcpBucket:
     type: string
     description: "The GCP bucket name"
-    default: "disearch-storage-bucket-2tzxkx9a"
+    default: ""
     
   projectID:
     type: string
     description: "The GCP project ID"
-    default: "world-learning-400909"
+    default: ""
     
   replicaCount:
     type: integer
@@ -152,7 +152,7 @@ properties:
   pdfConvert.cloudSqlDbConn:
     type: string
     description: "The Cloud SQL DB connection string (Base64-encoded)"
-    default: "cG9zdGdyZXNxbDovL3Bvc3RncmVzOkNLaEVKWkhbdUZTOyU9TWc4aXd1ZVZtJnhAMTAuNTAuMC42L3Bvc3RncmVz"
+    default: ""
     x-google-marketplace:
       type: STRING
       required: true
@@ -160,7 +160,7 @@ properties:
   loadbalancer.k8sApiServerUrl:
     type: string
     description: "The URL for the Kubernetes API server (Base64-encoded)"
-    default: "aHR0cHM6Ly8xMC4zLjAuNA=="
+    default: ""
     x-google-marketplace:
       type: STRING
       required: true
@@ -173,17 +173,17 @@ properties:
   vertexai.statusCloudFn:
     type: string
     description: "The URL for the Vertex AI status cloud function"
-    default: "https://us-central1-world-learning-400909.cloudfunctions.net/document-status"
+    default: ""
           
   vertexai.imageSummaryCloudFn:
     type: string
     description: "The URL for the Vertex AI image summary cloud function"
-    default: "https://us-central1-world-learning-400909.cloudfunctions.net/image-processing"
+    default: ""
           
   vertexai.updateMetadataFn:
     type: string
     description: "The URL for the Vertex AI metadata update cloud function"
-    default: "https://us-central1-world-learning-400909.cloudfunctions.net/update_metadata_ingested_document"
+    default: ""
     
   vertexai.schema:
     type: string
