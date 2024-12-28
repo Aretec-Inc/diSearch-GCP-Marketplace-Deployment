@@ -246,7 +246,7 @@ Deploying Cloud Function Metadata Extractor
 
   #### Required Variables for Deployer Image Deployment
 
-  When deploying the deployer image from Google Cloud Marketplace, you need to provide following variables.
+  When deploying the deployer image from Google Cloud Marketplace, you need to provide following variables. 
 
   - GCP project id
   - GCP Cloud SQL Db Connection String in Base64 Encoded format
@@ -261,7 +261,7 @@ Deploying Cloud Function Metadata Extractor
     - image-processing
     - update_metadata_ingested_document
 
-You can obtain the required variable information using the following commands and place this information in the corresponding values.yaml file.
+You can use the following commands to obtain the required variable information. Add this information as **default values** in the **schema.yaml** file and include it in the corresponding **values.yaml** file as discussed below.
 
 - Fetch the project ID and place it in the vertexai and disearch values.yaml file at line #4.
 
