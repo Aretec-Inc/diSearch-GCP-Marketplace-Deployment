@@ -261,11 +261,11 @@ Deploying Cloud Function Metadata Extractor
     - image-processing
     - update_metadata_ingested_document
 
-You can use the following commands to obtain the required variable information. Add this information as **default values** in the **schema.yaml** file and include it in the corresponding **values.yaml** file, as described below.
+You can use the following commands to obtain the required variable information. Add this information as **default values** under the **properties** section in the **schema.yaml** file and include it in the corresponding **values.yaml** file, as described below.
 
 - Fetch the project ID and place it in the vertexai and disearch values.yaml file at line #4.
 
-- Use the following command to create a connection string and encode it in Base64. Place it in vertexai values.yaml at line #12 under the variable "cloudSqlDbConn".
+- Use the following command to create a connection string and encode it in Base64. Place it in vertexai values.yaml at line #12 under the variable **cloudSqlDbConn**.
 
     Creating Postgres Connection String
 
@@ -277,7 +277,7 @@ You can use the following commands to obtain the required variable information. 
 
       echo "ENCODED_CONN_STRING: $(echo "$ENCODED_CONN_STRING" | base64 --decode)"
 
-- Fetch the private endpoint of the cluster and encode it in Base64. Place it in vertexai values.yaml at line #18 under the variable "k8sApiServerUrl".
+- Fetch the private endpoint of the cluster and encode it in Base64. Place it in vertexai values.yaml at line #18 under the variable **k8sApiServerUrl**.
 
       Fetch private endpoint of Cluster
 
@@ -287,34 +287,34 @@ You can use the following commands to obtain the required variable information. 
 
         echo <INTERNAL_ENDPOINT_ENCODED_VALUE> | base64 --decode
 
-- Place the client website URL in the disearch values.yaml file at line #6 under the variable "allowedOrigin".
-- Place the client email address in the disearch values.yaml file at line #7 under the variable "authEmail".
+- Place the client website URL in the disearch values.yaml file at line #6 under the variable **allowedOrigin**.
+- Place the client email address in the disearch values.yaml file at line #7 under the variable **authEmail**.
 
 - DB User: Place at line #8 in disearch values.yaml file..
 
-    gcloud secrets versions access latest --secret="DB_USER"
+    gcloud secrets versions access latest --secret=**DB_USER**
 
 - DB Password: Place at line #9 in disearch values.yaml file..
 
-    gcloud secrets versions access latest --secret="DB_PASSWORD"
+    gcloud secrets versions access latest --secret=**DB_PASSWORD**
 
 - DB Host: Place at line #11 in disearch values.yaml file.
 
-    gcloud secrets versions access latest --secret="DB_HOST"
+    gcloud secrets versions access latest --secret=**DB_HOST**
 
 - GCP Bucket: Place at line #10 in disearch values.yaml file
 
-    gcloud secrets versions access latest --secret="GCP_BUCKET"
+    gcloud secrets versions access latest --secret=**GCP_BUCKET**
 
-- Fetch Cloudfunction URLs of service document-status and place this in vertexai values.yaml file at line 35 under variable "statusCloudFn".
+- Fetch Cloudfunction URLs of service document-status and place this in vertexai values.yaml file at line 35 under variable **statusCloudFn**.
 
     gcloud functions describe document-status --region=us-central1 --format="value(url)"
 
-- Get Cloudfunction URLs of service image-processing and place this in vertexai values.yaml file at line 36 under variable "imageSummaryCloudFn".
+- Get Cloudfunction URLs of service image-processing and place this in vertexai values.yaml file at line 36 under variable **imageSummaryCloudFn**.
 
     gcloud functions describe image-processing --region=us-central1 --format="value(url)"
 
-- Get Cloudfunction URLs of service update_metadata and place this in vertexai values.yaml file at line 37 under variable "updateMetadataFn".
+- Get Cloudfunction URLs of service update_metadata and place this in vertexai values.yaml file at line 37 under variable **updateMetadataFn**.
 
     gcloud functions describe update_metadata_ingested_document --region=us-central1 --format="value(url)"
 
