@@ -8,14 +8,14 @@ namespace: "default"
 
 pdfConvert:
   containerPort: 5000 
-  ## Connection string for postgress database
+  ## Connection string for postgress database. (Must be base64 encoded)
   cloudSqlDbConn: ""
 
 loadbalancer:
   containerPort: 8080
-  ## k8 endpoint
+  ## Kube API Server Internal Endpoint URL. For Example: https://10.8.8.8:6446
   k8sApiServerUrl: ""
-  #etcd.default.svc.cluster.local:2379
+  # ETCD Host must be in base64 encoded form. Example Value: etcd.default.svc.cluster.local:2379
   etcdHost: "ZXRjZC5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsOjIzNzk="
   etcdPassword: ""
    
