@@ -429,3 +429,19 @@ Make sure to add the Website URL here.
       --project=$PROJECT_ID --service-account=terraform@$PROJECT_ID.iam.gserviceaccount.com
 
     gcloud run jobs execute llm-model-migration --region us-central1
+
+
+## Step 19: Deploy DiSearch from GCP Marketplace
+
+Once Step 18 is successfully completed, proceed to the GCP Marketplace and locate "DiSearch." After selecting it, provide the required details as follows:
+
+- Microservices URLs  
+- Database Credentials  
+- Storage Bucket Name  
+- CORS Allowed Origin for Bucket  
+- Owner Email  
+- Project ID  
+- OpenAI API Key  
+- Service Account Name  
+
+After filling in the necessary information, deploy the solution.
