@@ -1,8 +1,8 @@
 ##This file will hold the actual values for the Helm chart. These values will either come from the default values defined in schema.yaml or the user input provided during installation (as in the mpdev command)
-namespace: "default"  
+namespace: "default"
 pullImagefrom: "aretecinc-public"
 ## Client GCP Project ID (Example: my-project)
-projectID: ""        
+projectID: ""
 containerPort: 5000
 ## Client Website url
 allowedOrigin: ""

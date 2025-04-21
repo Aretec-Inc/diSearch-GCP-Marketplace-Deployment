@@ -9,84 +9,230 @@ x-google-marketplace:
   images:
     disearch:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/disearch
+          default: gcr.io/aretecinc-public/disearch/deployer/disearch
         imageTag:
           type: TAG
-          default: "1.0.8"
-    
-    etcdImage: 
+          default: "1.0.55"
+
+    etcdImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
           default: gcr.io/aretecinc-public/disearch/cache/etcd
         imageTag:
           type: TAG
           default: "3.5.14-debian-12-r1"
-    
+
     redisImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
           default: gcr.io/aretecinc-public/disearch/cache/redis
         imageTag:
           type: TAG
           default: "7.2.5-debian-12-r2"
-    
-    documentChatImage: 
+
+    documentChatImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/document-chat
+          default: gcr.io/aretecinc-public/disearch/deployer/document-chat
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    loadbalancerImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/loadbalancer
         imageTag:
           type: TAG
           default: "1.0.8"
-    
-    loadbalancerImage:  
+
+    pdfConverterImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/loadbalancer
+          default: gcr.io/aretecinc-public/disearch/deployer/pdf-converter
         imageTag:
           type: TAG
-          default: "1.0.8"
-    
-    pdfConverterImage:  
-      properties:
-        imageRepo: 
-          type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/pdf-converter
-        imageTag:
-          type: TAG
-          default: "1.0.8"
-    
+          default: "1.0.55"
+
     vertexaiCitationsImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/vertexai-citations
+          default: gcr.io/aretecinc-public/disearch/deployer/citation
         imageTag:
           type: TAG
-          default: "1.0.8"
-    
+          default: "1.0.55"
+
     vertexaiInitImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/vertexai-init
+          default: gcr.io/aretecinc-public/disearch/deployer/vertexai-init
         imageTag:
           type: TAG
-          default: "1.0.8"
-    
+          default: "1.0.55"
+
     vertexaiSummaryImage:
       properties:
-        imageRepo: 
+        imageRepo:
           type: REPO_WITH_REGISTRY
-          default: gcr.io/aretecinc-public/disearch/vertexai-summary
+          default: gcr.io/aretecinc-public/disearch/deployer/summary
         imageTag:
           type: TAG
-          default: "1.0.8"
+          default: "1.0.55"
+
+    vertexaiFollowupImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/followup
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    multiModelDocChatImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/multi-model-doc-chat
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    researchAgentImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/research-agent
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    chatbotAskAngieImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/chatbot-askangie
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    imagePubSubImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/image-process-pubsub
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    metadataPubSubImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/metadata-process-pubsub
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    pdfConvertPubSubImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/pdf-convertor-pubsub
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+    
+    pdfHighlighterImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/pdf-highlighter
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    toolClassifierImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/tool-classifier
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    diFeedbackServicesImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/di-feedback-services
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    diProjectServicesImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/diproject-services
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    text2speechImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/text2speech
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    metadataExtractorImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/metadata-extractor
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    fileUploadImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/file-upload
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    uploaderTriggerImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/uploader-trigger
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    imageProcessImage:
+      properties:
+        imageRepo:
+          type: REPO_WITH_REGISTRY
+          default: gcr.io/aretecinc-public/disearch/deployer/image-process
+        imageTag:
+          type: TAG
+          default: "1.0.55"
+
+    
 
 properties:
   name:
@@ -96,7 +242,7 @@ properties:
     x-google-marketplace:
       type: NAME
       required: true
-      
+
   namespace:
     type: string
     description: The Kubernetes namespace for deploying the application.
@@ -104,22 +250,22 @@ properties:
     x-google-marketplace:
       type: NAMESPACE
       required: true
-    
+
   allowedOrigin:
     type: string
     description: "Allowed origin for CORS"
     default: ""
-    
+
   authEmail:
     type: string
     description: "Email address for authentication"
     default: ""
-    
+
   dbUser:
     type: string
     description: "The database username"
     default: ""
-    
+
   dbPassword:
     type: string
     description: "The database password"
@@ -132,17 +278,17 @@ properties:
     type: string
     description: "The database host"
     default: ""
-    
+
   gcpBucket:
     type: string
     description: "The GCP bucket name"
     default: ""
-    
+
   projectID:
     type: string
     description: "The GCP project ID"
     default: ""
-    
+
   replicaCount:
     type: integer
     title: Replica Count
@@ -164,27 +310,27 @@ properties:
     x-google-marketplace:
       type: STRING
       required: true
-  
+
   vertexai.openaiApiKey:
     type: string
     description: "The OpenAI API key for Vertex AI"
     default: ""
-    
+
   vertexai.statusCloudFn:
     type: string
     description: "The URL for the Vertex AI status cloud function"
     default: ""
-          
+
   vertexai.imageSummaryCloudFn:
     type: string
     description: "The URL for the Vertex AI image summary cloud function"
     default: ""
-          
+
   vertexai.updateMetadataFn:
     type: string
     description: "The URL for the Vertex AI metadata update cloud function"
     default: ""
-    
+
   vertexai.schema:
     type: string
     default: "disearch_search"
@@ -192,8 +338,8 @@ properties:
 
   serviceAccountName:
     type: string
-    default: gke-sa 
-    description: GKE Service Account Name 
+    default: gke-sa
+    description: GKE Service Account Name
 
 required:
   - name

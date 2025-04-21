@@ -2,7 +2,7 @@
 replicaCount: 1
 pullImagefrom: "aretecinc-public" 
 projectID: ""  
-#tag: 1.0.8
+tag: 1.0.55
 namespace: "default"
 
 pdfConvert:
@@ -41,4 +41,35 @@ vertexaiSummary:
   containerPort: 8000
 
 serviceAccountName: "gke-sa"
+
+text2speech:
+  containerPort: 5000
+
+diProjectServices:
+  containerPort: 3000
+
+toolClassifier:
+  containerPort: 8000
+
+pdfHighlighter:
+  containerPort: 8000
+
+pdfConverterPubSub:
+  containerPort: 8080
+
+metadataProcessingPubSub:
+  containerPort: 8080
+
+imageProcessingPubSub:
+  containerPort: 8080
+
+chatbotAskAngie:
+  containerPort: 8000
+
+researchAgent:
+  containerPort: 8000
+
+multiModelDocChat:
+  containerPort: 8000
+
 

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: text2speech-deployment
+  namespace: {{ .Values.namespace | default "default" }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: text2speech
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: text2speech
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+      - name: text2speech
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/text2speech:1.0.55
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.text2speech.containerPort }}
+

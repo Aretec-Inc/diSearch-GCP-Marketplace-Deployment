@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imageProcessingPubSub-deployment
+  namespace: {{ .Values.namespace | default "default" }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: imageProcessingPubSub
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: imageProcessingPubSub
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+      - name: imageProcessingPubSub
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/image-process-pubsub:1.0.55
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.imageProcessingPubSub.containerPort }}
+
