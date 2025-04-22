@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pdfConverter-service
+  namespace: {{ .Values.namespace | default "default" }}
+  annotations:
+    networking.gke.io/load-balancer-type: "Internal"
+spec:
+  selector:
+    app: pdfConverter
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: {{ .Values.pdfConverter.containerPort }}
+  type: LoadBalancer

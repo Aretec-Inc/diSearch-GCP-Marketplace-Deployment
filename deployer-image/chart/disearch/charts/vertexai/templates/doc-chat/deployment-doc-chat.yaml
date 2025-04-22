@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: doc-chat
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/document-chat:1.0.17
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/document-chat:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.docChat.containerPort }}

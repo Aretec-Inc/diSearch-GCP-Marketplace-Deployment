@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: chatbotAskAngie
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/chatbot-askangie:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/chatbot-askangie:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.chatbotAskAngie.containerPort }}

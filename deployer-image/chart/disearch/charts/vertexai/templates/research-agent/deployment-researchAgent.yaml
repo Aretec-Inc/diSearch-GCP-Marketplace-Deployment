@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: researchAgent
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/research-agent:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/research-agent:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.researchAgent.containerPort }}

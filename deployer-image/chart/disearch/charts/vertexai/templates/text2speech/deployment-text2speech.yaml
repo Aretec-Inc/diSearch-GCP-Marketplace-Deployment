@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: text2speech
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/text2speech:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/text2speech:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.text2speech.containerPort }}

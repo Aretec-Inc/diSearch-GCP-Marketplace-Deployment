@@ -4,7 +4,7 @@ metadata:
   name: vertexai-deployment
   namespace: {{ .Values.namespace | default "default" }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.vertexai.replicaCount }}
   selector:
     matchLabels:
       app: vertexai
@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: vertexai
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertexai-init:1.0.8
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertexai-init:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.vertexai.containerPort }}

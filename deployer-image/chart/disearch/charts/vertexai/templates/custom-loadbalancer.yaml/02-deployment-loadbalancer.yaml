@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: loadbalancer
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/loadbalancer:1.0.17
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/loadbalancer:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.loadbalancer.containerPort }}

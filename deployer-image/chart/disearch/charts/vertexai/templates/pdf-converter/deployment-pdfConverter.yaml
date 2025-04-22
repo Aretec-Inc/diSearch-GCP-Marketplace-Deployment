@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: multiModelDocChat-deployment
+  name: pdfConverter-deployment
   namespace: {{ .Values.namespace | default "default" }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: multiModelDocChat
+      app: pdfConverter
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -16,12 +16,12 @@ spec:
   template:
     metadata:
       labels:
-        app: multiModelDocChat
+        app: pdfConverter
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
-      - name: multiModelDocChat
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/multi-model-doc-chat:{{ .Values.tag }}
+      - name: pdfConverter
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/pdf-converter:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
-        - containerPort: {{ .Values.multiModelDocChat.containerPort }}
+        - containerPort: {{ .Values.pdfConverter.containerPort }}

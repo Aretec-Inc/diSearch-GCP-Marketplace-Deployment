@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: diToolClassifier
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/tool-classifier:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/tool-classifier:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.toolClassifier.containerPort }}

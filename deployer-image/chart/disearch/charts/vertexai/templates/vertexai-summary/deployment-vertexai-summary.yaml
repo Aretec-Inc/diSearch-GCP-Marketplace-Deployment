@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: vertexai-summary
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertexai-summary:1.0.8
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertexai-summary:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.vertexaiSummary.containerPort }}

@@ -4,6 +4,7 @@ pullImagefrom: "aretecinc-public"
 projectID: ""  
 tag: 1.0.55
 namespace: "default"
+serviceAccountName: "gke-sa"
 
 pdfConvert:
   containerPort: 5000
@@ -36,11 +37,10 @@ vertexai:
   imageSummaryCloudFn: ""
   updateMetadataFn: ""
   schema: "disearch_search"
+  replicaCount: 6
 
 vertexaiSummary:
   containerPort: 8000
-
-serviceAccountName: "gke-sa"
 
 text2speech:
   containerPort: 5000
@@ -71,5 +71,10 @@ researchAgent:
 
 multiModelDocChat:
   containerPort: 8000
+
+pdfConverter:
+  containerPort: 5000
+
+
 
 

@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: metadataProcessingPubSub
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/metadata-process-pubsub:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/metadata-process-pubsub:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.metadataProcessingPubSub.containerPort }}

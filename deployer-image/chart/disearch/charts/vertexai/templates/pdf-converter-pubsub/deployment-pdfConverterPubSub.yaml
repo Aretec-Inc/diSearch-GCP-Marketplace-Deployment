@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: pdfConverterPubSub
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/pdf-convertor-pubsub:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/pdf-convertor-pubsub:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.pdfConverterPubSub.containerPort }}

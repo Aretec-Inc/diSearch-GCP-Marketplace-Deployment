@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: vertexai-citation
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertexai-citations:1.0.17
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertexai-citations:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.vertexaiCitation.containerPort }}

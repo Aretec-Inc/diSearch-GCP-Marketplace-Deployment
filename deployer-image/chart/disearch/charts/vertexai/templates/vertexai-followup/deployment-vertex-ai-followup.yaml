@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: vertex-ai-followup
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertex-ai-followup:1.0.17
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/vertex-ai-followup:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.vertexAiFollowup.containerPort }}

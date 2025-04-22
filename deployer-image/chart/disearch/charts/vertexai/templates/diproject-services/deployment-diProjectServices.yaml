@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: diProjectServices
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/diproject-services:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/diproject-services:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.diProjectServices.containerPort }}

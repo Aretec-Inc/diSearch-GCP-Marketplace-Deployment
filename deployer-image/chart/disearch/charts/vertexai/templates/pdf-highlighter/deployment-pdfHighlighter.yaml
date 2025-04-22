@@ -21,7 +21,7 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
       - name: pdfHighlighter
-        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/pdf-highlighter:1.0.55
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/pdf-highlighter:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.pdfHighlighter.containerPort }}
