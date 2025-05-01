@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fileUpload-deployment
+  namespace: {{ .Values.namespace | default "default" }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: fileUpload
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: fileUpload
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+      - name: fileUpload
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/file-upload:{{ .Values.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.fileUpload.containerPort }}
+

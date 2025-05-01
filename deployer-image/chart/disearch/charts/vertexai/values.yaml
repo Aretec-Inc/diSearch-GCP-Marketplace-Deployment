@@ -75,6 +75,15 @@ multiModelDocChat:
 pdfConverter:
   containerPort: 5000
 
+metadataExtractor:
+  containerPort: 8080
+
+documentStatus:
+  containerPort: 5000
+
+fileUpload:
+  containerPort: 5000
+
 
 
 

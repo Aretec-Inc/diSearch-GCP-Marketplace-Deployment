@@ -10,7 +10,7 @@ metadata:
 spec:
   descriptor:
     type: disearch
-    version: '1.0.8'
+    version: '1.0.55'
   selector:
     matchLabels:
       app.kubernetes.io/name: "{{ .Release.Name }}"

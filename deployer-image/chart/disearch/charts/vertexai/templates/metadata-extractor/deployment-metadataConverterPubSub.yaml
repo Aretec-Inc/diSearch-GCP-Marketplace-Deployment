@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metadataExtractor-deployment
+  namespace: {{ .Values.namespace | default "default" }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: metadataExtractor
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: metadataExtractor
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+      - name: metadataExtractor
+        image: gcr.io/{{ .Values.pullImagefrom }}/disearch/metadata-extractor:{{ .Values.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.metadataExtractor.containerPort }}
+
